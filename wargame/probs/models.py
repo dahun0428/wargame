@@ -5,6 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 
+
 class Problem (models.Model):
   PWNABLE = 'PWN'
   REVERSING = 'REV'
@@ -15,11 +16,8 @@ class Problem (models.Model):
 
   prob_title = models.CharField (max_length=200)
   prob_description = models.TextField ()
-  created_date = models.DateTimeField (default=timezone.now)
   prob_score = models.IntegerField ()
-  prob_flag = models.CharField (max_length = 100)
-  prob_image = models.ImageField ()
-  prob_file = models.FileField ()
+  
 
   PROB_CATEGORY = (
     (PWNABLE, 'pwnable'),
@@ -34,10 +32,16 @@ class Problem (models.Model):
     default = PWNABLE,
   )
 
+  prob_number = models.IntegerField (default = 0)
+  prob_flag = models.CharField (max_length = 100)
+  prob_image = models.ImageField ()
+  prob_file = models.FileField ()
+  created_date = models.DateTimeField (default=timezone.now)
+
   def __str__ (self):
     return self.prob_title
 
   def publish (self):
-    self.publish_date = timezone_now ()
+    self.created_date = timezone_now ()
     self.save ()
 
