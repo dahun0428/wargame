@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+
+
+def probs_list (request):
+  return render (request, 'probs/probs_list.html', {})
