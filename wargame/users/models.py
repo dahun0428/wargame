@@ -8,11 +8,16 @@ import ast
 
 class ListField (models.TextField):
 
-  __metaclass__ = models.SubfieldBase
+#  __metaclass__ = models.
   description = "Stores a python list"
 
   def __init__ (self, *args, **kwargs):
     super (ListField, self).__init__(*args, **kwargs)
+
+  def frm_db_value (self, value, expression, connection, context):
+    if value is None:
+      return value
+    return parse_hand (value)
 
   def to_python (self, value):
     if not value:
